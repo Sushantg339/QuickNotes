@@ -8,18 +8,19 @@ const createNoteController = async (req, res) => {
         const note = await noteModel.create({ user: user._id, title, content });
 
         return res.status(201).json({
-        message: "Note created successfully",
-        note: {
-            id: note._id,
-            title: note.title,
-            content: note.content,
-            user: note.user,
-            createdAt: note.createdAt
-        }
+            message: "Note created successfully",
+            note: {
+                _id: note._id,
+                title: note.title,
+                content: note.content,
+                user: note.user,
+                createdAt: note.createdAt,
+                updatedAt: note.updatedAt,
+            },
         });
     } catch (error) {
         return res.status(400).json({
-            message: `Error creating note: ${error.message}`
+            message: `Error creating note: ${error.message}`,
         });
     }
 };
@@ -30,20 +31,50 @@ const getNotesController = async (req, res) => {
         const notes = await noteModel.find({ user: _id }).sort({ createdAt: -1 });
 
         const formattedNotes = notes.map(note => ({
-            id: note._id,
+            _id: note._id,
             title: note.title,
             content: note.content,
             user: note.user,
-            createdAt: note.createdAt
+            createdAt: note.createdAt,
+            updatedAt: note.updatedAt,
         }));
 
         return res.status(200).json({
             message: "Notes fetched successfully",
-            notes: formattedNotes
+            notes: formattedNotes,
         });
     } catch (error) {
         return res.status(400).json({
-            message: `Error fetching notes: ${error.message}`
+            message: `Error fetching notes: ${error.message}`,
+        });
+    }
+};
+
+const getOneNoteController = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const note = await noteModel.findById(id);
+        if (!note) {
+            return res.status(404).json({
+                message: "Note not found",
+            });
+        }
+
+        return res.status(200).json({
+            message: "Note fetched successfully",
+            note: {
+                _id: note._id,
+                title: note.title,
+                content: note.content,
+                user: note.user,
+                createdAt: note.createdAt,
+                updatedAt: note.updatedAt,
+            },
+        });
+    } catch (error) {
+        return res.status(400).json({
+            message: `Error fetching note: ${error.message}`,
         });
     }
 };
@@ -67,16 +98,17 @@ const updateNoteController = async (req, res) => {
         return res.status(202).json({
             message: "Note updated successfully",
             note: {
-                id: note._id,
+                _id: note._id,
                 title: note.title,
                 content: note.content,
                 user: note.user,
-                updatedAt: note.updatedAt
-            }
+                createdAt: note.createdAt,
+                updatedAt: note.updatedAt,
+            },
         });
     } catch (error) {
         return res.status(400).json({
-            message: `Error updating note: ${error.message}`
+            message: `Error updating note: ${error.message}`,
         });
     }
 };
@@ -92,22 +124,30 @@ const deleteNoteController = async (req, res) => {
             return res.status(403).json({ message: "Not authorized to delete this note" });
         }
 
-        await note.remove();
+        await noteModel.findByIdAndDelete(id);
 
         return res.status(200).json({
             message: "Note deleted successfully",
             note: {
-                id: note._id,
+                _id: note._id,
                 title: note.title,
                 content: note.content,
-                user: note.user
-            }
+                user: note.user,
+                createdAt: note.createdAt,
+                updatedAt: note.updatedAt,
+            },
         });
     } catch (error) {
         return res.status(400).json({
-            message: `Error deleting note: ${error.message}`
+            message: `Error deleting note: ${error.message}`,
         });
     }
 };
 
-module.exports = { createNoteController, getNotesController, updateNoteController, deleteNoteController };
+module.exports = { 
+    createNoteController, 
+    getNotesController, 
+    updateNoteController, 
+    deleteNoteController, 
+    getOneNoteController 
+};
