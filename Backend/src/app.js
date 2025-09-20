@@ -3,7 +3,7 @@ const connectToDB = require('./db/db')
 require('dotenv').config()
 const cookieParser = require('cookie-parser')
 const authRoutes = require('./routes/auth.routes') 
-
+const noteRoutes = require('./routes/note.routes')
 
 
 const app = express()
@@ -15,5 +15,6 @@ app.use(cookieParser())
 
 
 app.use('/api/auth' , authRoutes)
+app.use('/api/note', noteRoutes)
 
 module.exports = app
