@@ -21,7 +21,7 @@ app.use('/api/auth' , authRoutes)
 app.use('/api/note', noteRoutes)
 
 app.get('/*splat', (req, res) => {
-    res.sendFile(path.join(__dirname, '../frontend/dist', 'index.html'))
+    res.sendFile(path.join(__dirname, '../../Frontend/dist', 'index.html'))
 })
 
 module.exports = app
