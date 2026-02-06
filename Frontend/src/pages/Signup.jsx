@@ -49,6 +49,7 @@ const Signup = () => {
                     ? "border-red-500 focus:ring-red-500" 
                     : "border-gray-300 focus:ring-black"}`   
                 }
+                autoComplete="off"
             />
             {errors.username && <span className="text-red-500 text-sm">{errors.username.message}</span>}
             </div>
@@ -65,6 +66,7 @@ const Signup = () => {
                     ? "border-red-500 focus:ring-red-500" 
                     : "border-gray-300 focus:ring-black"}`
                 }
+                autoComplete="off"
                 
             />
             {errors.email && <span className="text-red-500 text-sm">{errors.email.message}</span>}
@@ -82,6 +84,7 @@ const Signup = () => {
                     ? "border-red-500 focus:ring-red-500" 
                     : "border-gray-300 focus:ring-black"}`
                 }
+                autoComplete="off"
             />
             {errors.password && <span className="text-red-500 text-sm">{errors.password.message}</span>}
             </div>

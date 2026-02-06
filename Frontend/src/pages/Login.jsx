@@ -51,6 +51,7 @@ const Login = () => {
                     ? "border-red-500 focus:ring-red-500" 
                     : "border-gray-300 focus:ring-black"}`
                 }
+                autoComplete="off"
             />
             {errors.credential && <span className="text-red-500 text-sm">{errors.credential.message}</span>}
             </div>
@@ -67,6 +68,7 @@ const Login = () => {
                     ? "border-red-500 focus:ring-red-500" 
                     : "border-gray-300 focus:ring-black"}`
                 }
+                autoComplete="off"
             />
             {errors.password && <span className="text-red-500 text-sm">{errors.password.message}</span>}
             </div>
