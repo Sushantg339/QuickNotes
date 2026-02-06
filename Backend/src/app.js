@@ -7,7 +7,7 @@ const noteRoutes = require('./routes/note.routes')
 const app = express()
 
 const ___dirname = path.resolve()
-app.use(express.static(path.join(___dirname, '../frontend/dist')))
+app.use(express.static(path.join(___dirname, '../../Frontend/dist')))
 
 connectToDB()
 app.use(express.json())
