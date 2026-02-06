@@ -5,7 +5,6 @@ const path = require('path')
 const cookieParser = require('cookie-parser')
 const authRoutes = require('./routes/auth.routes') 
 const noteRoutes = require('./routes/note.routes')
-const cors = require('cors')
 const app = express()
 
 const ___dirname = path.resolve()
@@ -15,10 +14,6 @@ connectToDB()
 app.use(express.json())
 app.use(express.urlencoded({extended : true}))
 app.use(cookieParser())
-app.use(cors({
-    origin: "http://localhost:5173", 
-    credentials: true
-}));
 
 
 
