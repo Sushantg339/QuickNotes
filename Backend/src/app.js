@@ -7,7 +7,7 @@ const authRoutes = require('./routes/auth.routes')
 const noteRoutes = require('./routes/note.routes')
 const app = express()
 
-const ___dirname = path.resolve()
+const __dirname = path.resolve()
 app.use(express.static(path.join(__dirname, '../frontend/dist')))
 
 connectToDB()
